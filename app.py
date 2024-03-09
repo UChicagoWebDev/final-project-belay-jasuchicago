@@ -251,8 +251,8 @@ def list_channels():
         channel_name = row["channel_name"].decode('utf-8') if isinstance(row["channel_name"], bytes) else row["channel_name"]
         
         # Calculate unread messages for each channel
-        unread = 0 if channel_id == current_channel else num_messages_unread(channel_id, user_id, current_channel)
-        
+        # unread = 0 if channel_id == current_channel else num_messages_unread(channel_id, user_id, current_channel)
+        unread = 0
         row_dict = {
             "channel_id": channel_id,
             "channel_name": channel_name,
@@ -345,7 +345,10 @@ def create_reaction_dictionary(message_id):
 def num_messages_unread(channel_id, user_id, current_channel):
     if channel_id == current_channel:
         return 0  # No unread messages in the current channel
-
+    else:
+        return '^'
+    
+    '''
     exit_time_row = query_db("SELECT exit_time FROM last_seen WHERE channel_id = ? AND user_id = ?", (current_channel, user_id), one=True)
     
     if exit_time_row:
@@ -354,8 +357,9 @@ def num_messages_unread(channel_id, user_id, current_channel):
         # If the user hasn't exited the current channel yet, consider all messages as unread
         exit_time = datetime.min
 
-    unread_messages_count = query_db("SELECT COUNT(*) FROM messages WHERE channel_id = ? AND time_entered > ?", (channel_id, exit_time.isoformat())).fetchone()[0]
+    unread_messages_count = query_db("SELECT COUNT(*) FROM messages WHERE channel_id = ? AND user_id = ? AND time_entered > ?", (channel_id, user_id, exit_time.isoformat()))
     return unread_messages_count
+    '''
 
 if __name__ == '__main__':
     app.run()

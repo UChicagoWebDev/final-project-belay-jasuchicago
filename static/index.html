@@ -1,0 +1,234 @@
+<html>
+
+<head>
+    <title>Belay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    </link>
+</head>
+
+<body>
+
+    <!-- Unauthenticated UI - "/" -->
+    <div class="splash container" id="loggedOut">
+        <div class="hero">
+            <div class="logo">
+                <img src="/static/belay-logo.png">
+            </div>
+            <!-- <h3>Chat Channels</h3> -->
+            <div class="button-container">
+                <button class="signup">Signup</button>
+                <button class="login-button">Login</button>
+            </div>
+        </div>
+    </div>
+    <!-- end .splash -->
+
+
+    <!-- Profile Page - "/profile" -->
+    <div class="profile">
+        <div id="profile-page">
+            <div class="hero">
+                <div class="logo">
+                    <img src="/static/belay-logo.png">
+                </div>
+                <!-- <h3>Chat Channels</h3> -->
+            </div>
+            <div class="header">
+                Welcome, <span class="username" id="profile-username"></span>!
+            </div>
+            <div class="auth container">
+                <div class="alignedForm">
+                    <div class="inputs">
+                        <label for="username">Change Username: </label>
+                        <input name="username" id="name-set" value="">
+                        <button id="updateUser">update</button>
+                    </div>
+                    <br>
+                    <div class="inputs">
+                        <label for="password">Change Password: </label>
+                        <input type="password" name="password" id="pw-set" value="">
+                        <button id="updatePassword">update</button>
+                    </div>
+                    <br>
+                    <button class="exit return" id="go-back">Return to Channels</button>
+                    <br>
+                    <button class="exit logout" id="log-out">Log out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end .profile -->
+
+
+    <!-- Login Page - "/login" -->
+    <div class="login">
+        <div id="login-page">
+            <div class="hero">
+                <div class="logo">
+                    <img src="/static/belay-logo.png">
+                </div>
+                <!-- <h3>Chat Channels</h3> -->
+            </div>
+            <div class="header">
+                Enter Your Username and Password to Login:
+            </div>
+            <div class="auth container">
+                <div class="alignedForm">
+                    <div class="inputs">
+                        <label for="username">Username: </label>
+                        <input id="login-username" value="">
+                    </div>
+                    <br>
+                    <div class="inputs">
+                        <label for="password">Password: </label>
+                        <input type="password" id="login-pw" value="">
+                        <button class="go-button">Login!</button>
+                    </div>
+                    <br>
+                    <div class="oops">
+                        <div class="failed">
+                            <div class="message hide">
+                                Oops, this account doesn't exist! Signup to get started:
+                            </div>
+                            <button class="new">Signup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end .login -->
+
+    <!-- Two column channels page -->
+    <div class="channels">
+        <div class="top-header">
+            <img class="small-logo" src="/static/belay-logo.png">
+            <h4>Hi <span class="username" id="two-username"></span>!</h4>
+            <button id="profile-button1">Edit Profile</button>
+        </div>
+
+        <div class="page-container">
+            <div class="descriptions"> </div>
+            <div class="descriptions" id="name-2col"> </div>
+            <div style="width: 300px;">
+                <left> Channels </left>
+                <br>
+                <inside id="channels-2col">
+
+                </inside>
+                <button id="create-channel1"> &#43; </button>
+                <div id="un-hide1" class="hide">
+                    <input id="channel-set1" value="" placeholder="Enter the new channel name">
+                    <button id="hit-enter1"> Create Channel</button>
+                </div>
+            </div>
+
+            <div class="right">
+                <inside id="messages-2col">
+
+                </inside>
+                <post class="post1 hide">
+                    <br>
+                    <div class="container">
+                        <div class="expandable-textarea">
+                            <textarea id="post-box1" name="comment" placeholder="Type a message..." rows="2"
+                                oninput="this.parentNode.dataset.replicatedValue = this.value"
+                                onblur="this.parentNode.dataset.replicatedValue = null"
+                                onclick="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <button id="post-button1">Post Message</button>
+                </post>
+            </div>
+
+        </div>
+    </div>
+    <!-- end .channels -->
+
+
+    <!-- Three column channels page -->
+    <div class="threads">
+        <div class="top-header">
+            <img class="small-logo" src="/static/belay-logo.png">
+            <h4>Hi <span class="username" id="three-username"></span>!</h4>
+            <button id="profile-button2">Edit Profile</button>
+        </div>
+
+        <div class="page-container">
+            <div class="descriptions"> </div>
+            <div class="descriptions" id="name-3col"> </div>
+
+            <div id="thread-title">
+                <button class="reaction" id="exit-threads"> &#x274C; </button>
+                <small> Replies To </small>
+                <message id="header-three">
+
+                </message>
+            </div>
+
+            <div style="width: 300px;">
+                <left> Channels </left>
+                <inside id="channels-3col">
+ 
+                </inside>
+                <button id="create-channel2"> &#43; </button>
+                <div class="hide" id="un-hide2">
+                    <input id="channel-set2" value="" placeholder="Enter the new channel name">
+                    <button id="hit-enter2"> Create Channel</button>
+                </div>
+            </div>
+
+            <div class="right">
+                <inside id="messages-3col">
+
+                </inside>
+                <post class="post2 hide">
+                    <br>
+                    <div class="container">
+                        <div class="expandable-textarea">
+                            <textarea id="post-box2" name="comment" placeholder="Type a message..." rows="2"
+                                oninput="this.parentNode.dataset.replicatedValue = this.value"
+                                onblur="this.parentNode.dataset.replicatedValue = null"
+                                onclick="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <button id="post-button2">Post Message</button>
+                </post>
+            </div>
+
+            <div class="open-thread">
+                <inside id="replies-plane">
+
+                </inside>
+
+                <message>
+                    <div class="container">
+                        <div class="expandable-textarea">
+                            <textarea id="reply-box" name="comment" placeholder="Type a message..." rows="2"
+                                oninput="this.parentNode.dataset.replicatedValue = this.value"
+                                onblur="this.parentNode.dataset.replicatedValue = null"
+                                onclick="this.parentNode.dataset.replicatedValue = this.value"></textarea>
+                        </div>
+                    </div>
+                    <button id="reply-button">Post Reply</button>
+                </message>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end .threads -->
+
+    <script src="/static/script.js"> </script>
+</body>
+
+</html>

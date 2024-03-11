@@ -100,7 +100,7 @@ def login():
 
 
 # Route to update user profile
-@app.route('/api/profile', methods=["PUT"])
+@app.route('/api/profile', methods=["POST"])
 def update_profile():
     api_key = request.headers.get('auth-key')
     username = request.headers.get('username')

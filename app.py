@@ -81,18 +81,22 @@ def signup():
 
 
 # Route to handle user login
-@app.route('/api/login', methods=["POST"])
+@app.route('/api/login', methods=["GET", "POST"])
 def login():
-    username = request.headers.get('username')
-    password = request.headers.get('password')
-    user = query_db("SELECT * FROM users WHERE username = ? AND password = ?", [username, password], one=True)
-    if not user:
-        return jsonify({"error": "Invalid credentials"}), 401
-    user_dict = {
-        "user_id": user["user_id"].decode('utf-8') if isinstance(user["user_id"], bytes) else user["user_id"],
-        "user_api_key": user["api_key"].decode('utf-8') if isinstance(user["api_key"], bytes) else user["api_key"]
-    }
-    return jsonify(user_dict)
+    if request.method == "GET":
+        username = request.headers.get('username')
+        password = request.headers.get('password')
+        user = query_db("SELECT * FROM users WHERE username = ? AND password = ?", [username, password], one=True)
+        if not user:
+            return jsonify({"error": "Invalid credentials"}), 401
+        user_dict = {
+            "user_id": user["user_id"].decode('utf-8') if isinstance(user["user_id"], bytes) else user["user_id"],
+            "user_api_key": user["api_key"].decode('utf-8') if isinstance(user["api_key"], bytes) else user["api_key"]
+        }
+        return jsonify(user_dict)
+    
+    if request.method == "POST":
+        return signup()
 
 
 # Route to update user profile
@@ -251,8 +255,7 @@ def list_channels():
         channel_name = row["channel_name"].decode('utf-8') if isinstance(row["channel_name"], bytes) else row["channel_name"]
         
         # Calculate unread messages for each channel
-        # unread = 0 if channel_id == current_channel else num_messages_unread(channel_id, user_id, current_channel)
-        unread = 0
+        unread = 0 if channel_id == current_channel else num_messages_unread(channel_id, user_id, current_channel)
         row_dict = {
             "channel_id": channel_id,
             "channel_name": channel_name,

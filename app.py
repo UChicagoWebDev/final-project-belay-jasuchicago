@@ -91,7 +91,8 @@ def login():
             return jsonify({"error": "Invalid credentials"}), 401
         user_dict = {
             "user_id": user["user_id"].decode('utf-8') if isinstance(user["user_id"], bytes) else user["user_id"],
-            "user_api_key": user["api_key"].decode('utf-8') if isinstance(user["api_key"], bytes) else user["api_key"]
+            "user_api_key": user["api_key"].decode('utf-8') if isinstance(user["api_key"], bytes) else user["api_key"],
+            "user_name": user["username"].decode('utf-8') if isinstance(user["username"], bytes) else user["username"]
         }
         return jsonify(user_dict)
     
